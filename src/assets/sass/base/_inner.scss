@@ -1,0 +1,23 @@
+@use "../setting" as global;
+@use "../mixin" as mixin;
+
+
+/* ===================================================
+  #inner幅のスタイル
+=================================================== */
+.inner {
+  width: global.$layout-width-inner;
+  max-width: 100%;
+  margin: 0 auto;
+
+  @include mixin.mq('tab') {
+      padding-left: 24px;
+      padding-right: 24px;
+  }
+
+  @include mixin.mq('sp') {
+      padding-right: 16px;
+      padding-left: 16px;
+  }
+}
+

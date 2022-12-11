@@ -1,0 +1,166 @@
+@use "../../setting" as global;
+@use "../../mixin" as mixin;
+
+/* ===================================================
+  #about
+=================================================== */
+.about{
+  &::before{
+    content:"";
+    display: block;
+    background: url(../img/toimisaki.jpg) no-repeat center bottom / cover;
+    filter: contrast(1.5) saturate(1.2) brightness(0.8) ;
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index:map-get(global.$layer,parallarx);
+  }
+}
+
+.about__inner {
+  @include mixin.inner-back(right, 0deg, url(../img/green14.png)){};
+}
+
+.about__content {
+  background: global.$color-accent1;
+  border: 5px outset global.$color-accent2;
+  padding: 30px;
+  border-radius: 10px;
+}
+
+.about-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  @include mixin.mq('sp') {
+    display: block;
+  }
+}
+
+.about-item__left {
+  //各ブラウザでの幅を指定
+  @include mixin.mq('pc') {
+    flex: 0 0 400px;
+  }
+
+  @include mixin.mq('tab') {
+    flex: 0 0 300px;
+  }
+
+  @include mixin.mq('sp') {
+    width: 100%;
+  }
+}
+
+//どんな画像がきても横縦が1対1の割合を保つ
+.about-item__img{
+  padding-top: calc(1 / 1 * 100%);
+  position: relative;
+  overflow: hidden;
+  img {
+    position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius:20px;
+      user-select: none;
+  }
+}
+
+//about-item__right部分ウィンドウ幅によって縮んでもいいようにする
+.about-item__right {
+  padding: 20px 0 0;
+  max-width: 100%;
+  @include mixin.mq('pc') {
+    margin-left: 70px;
+    flex: 0 1 40%;
+  }
+
+  @include mixin.mq('tab') {
+    margin-left: 50px;
+    flex: 0 1 40%;
+  }
+
+  @include mixin.mq('sp') {
+    width: 100%;
+  }
+}
+
+.about-item__name {
+  font-weight: 700;
+  font-size: 24px;
+
+  @include mixin.mq('tab') {
+    font-size: 18px;
+  }
+
+  @include mixin.mq('sp') {
+    text-align: center;
+    font-size: 16px;
+  }
+}
+
+.about-item__comment {
+  margin-top: 30px;
+  font-size: 20px;
+  line-height: 2.0;
+  letter-spacing:0.04em;
+
+  @include mixin.mq('tab') {
+    margin-top: 10px;
+    font-size: 16px;
+  }
+
+  @include mixin.mq('sp') {
+    margin-top: 12px;
+    font-size: 14px;
+  }
+}
+
+.about-item__contact {
+  margin-top: 15px;
+  backface-visibility: hidden;
+
+  @include mixin.mq('sp') {
+    margin-top: 12px;
+  }
+}
+
+.about-item__contact-menu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  // gap:40px;
+}
+
+.about-item__contact-list {
+  &:not(:first-child) {
+    margin-left: 50px;
+
+    @include mixin.mq('sp') {
+      margin-left: 0;
+    }
+  }
+
+  @include mixin.mq('sp') {
+    margin: 0 auto;
+  }
+
+  a {
+    display: inline-block;
+    font-size: 40px;
+    text-decoration: none;
+    @include mixin.mq('tab') {
+      font-size: 30px;
+    }
+
+    @include mixin.mq('sp') {
+      font-size: 30px;
+    }
+  }
+}

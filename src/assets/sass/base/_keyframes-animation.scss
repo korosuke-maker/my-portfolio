@@ -1,0 +1,122 @@
+@use "../setting" as global;
+@use "../mixin" as mixin;
+/* ===================================================
+  #css-keyframes-animation
+=================================================== */
+
+// 下からふんわりとfadeIn
+@keyframes show {
+  0% {
+    opacity: 0;
+    transform: translateY(50px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0px) scale(1);
+  }
+}
+
+.animation-fadeIn {
+  transform: translateY(50px);
+  opacity: 0;
+
+  &.fadeIn {
+    animation: show 0.8s ease-out 1 forwards;
+  }
+}
+
+//opacityだけふわっとさせる
+@keyframes opacity {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.opacity-animation {
+  opacity: 0;
+}
+
+.is-show {
+  animation: opacity ease 0.5s 1 forwards;
+}
+
+
+// ズームアップするアニメーション
+@keyframes zoomUp {
+  0% {
+    transform: scale(1.4);
+  }
+
+  50% {
+    transform: scale(1.2);
+  }
+
+  100% {
+    transform: scale(1.0);
+  }
+}
+
+//section-title::beforeの文字のいろを変化させるスタイルアニメーション
+@keyframes changeColor{
+  0% {color: #ffffff5f; }
+  20% {color: #499e9d98; }
+  40% {color: #3fc2a8; }
+  60% {color: #91e09d91; }
+  80% {color: #b9e7c0a6; }
+  100% {color: #ffffff5f; }
+}
+
+//backgroundが変化するアニメーション（home::after） 大きな黒透明のグラデーションを作って、backgraound-positionで動かす
+@keyframes bgColor{
+  0% {
+		background-position: 0% 50%;
+	}
+  50%{
+    background-position: 100% 50%;
+  }
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+
+//section-title周りのアニメーション(長方形の背景とテキストのopacity)
+@keyframes bgextendBase {
+	from{
+		opacity: 0;
+	}
+	to{
+		opacity: 1;
+	}
+}
+
+@keyframes bgextendSecond {
+	0% {
+		opacity: 0;
+		}
+		100% {
+		opacity: 1;
+	}
+}
+
+@keyframes bgLR{
+	0% {
+		transform-origin:left;
+		transform:scaleX(0);
+	}
+	50% {
+		transform-origin:left;
+		transform:scaleX(1);
+	}
+	50.001% {
+		transform-origin:right;
+	}
+	100% {
+		transform-origin:right;
+		transform:scaleX(0);
+	}
+}

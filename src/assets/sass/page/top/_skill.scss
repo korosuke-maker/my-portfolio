@@ -1,0 +1,249 @@
+@use "../../setting" as global;
+@use "../../mixin" as mixin;
+
+/* ===================================================
+  #skill
+=================================================== */
+
+.skill__inner {
+  @include mixin.inner-back(right, 0deg, url(../img/green8.png)){};
+}
+
+.skill__items {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.skill-item {
+  border: 5px outset global.$color-accent2;
+  background: global.$color-accent1;
+  width: calc(33.3% - 30px * 2 / 3);
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  text-align: center;
+  position: relative;
+  transition: all 0.4s;
+
+  //PC時
+  @include mixin.mq('pc') {
+    &:not(:nth-child(3n+1)) {
+      margin-left: 30px;
+    }
+
+    &:nth-child(n+4) {
+      margin-top: 20px;
+    }
+  }
+
+  //tab時
+  @include mixin.mq('tab') {
+    width: calc(50% - 30px * 1 / 2);
+    padding: 25px;
+    &:not(:nth-child(2n+1)) {
+      margin-left: 30px;
+    }
+
+    &:nth-child(n+3) {
+      margin-top: 20px;
+    }
+  }
+
+  //sp時
+  @include mixin.mq('sp') {
+    width: 100%;
+    padding: 20px;
+
+    &:nth-child(n+2) {
+      margin-top: 12px;
+    }
+  }
+
+  //before擬似要素でskill-itemに黒いmaskを作成
+  &::before {
+    content: "Click to slide down";
+    font-size: 34px;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.75);
+    z-index: map-get(global.$layer, skill-item-before);
+    opacity: 0;
+    transition: all 0.3s;
+
+    @include mixin.mq('tab') {
+      font-size: 28px;
+    }
+
+    @include mixin.mq('sp') {
+      font-size: 26px;
+    }
+  }
+
+  // hover時beforeを出現
+  @include mixin.media-hover('hover') {
+    border:5px solid global.$color-accent3;
+    &::before {
+      opacity: 1;
+    }
+
+    //ただ、is-open付与時(dropdown時)beforeのopacity0に
+    &.is-open {
+      &::before {
+        opacity: 0;
+      }
+    }
+  }
+
+  @include mixin.media-hover('none') {
+    &::before {
+      opacity: 1;
+    }
+
+    &.is-open {
+      &::before {
+        opacity: 0;
+      }
+    }
+  }
+}
+
+.skill-item__img {
+  padding-top: calc(1 / 1 * 100%);
+  position: relative;
+  overflow: hidden;
+  width: 300px;
+  margin: 0 auto;
+  max-width: 100%;
+  user-select: none;
+
+  img {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+}
+
+.skill-item__title {
+  display: inline-block;
+  font-size: 36px;
+  font-weight: 700;
+  margin-top: 20px;
+  padding-right: 30px;
+  position: relative;
+  user-select: none;
+
+  @include mixin.mq('sp') {
+    font-size: 20px;
+  }
+
+  //タイトル横の三角形
+  &::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 0;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 17.3px 10px 0 10px;
+    border-color: global.$color-text transparent transparent transparent;
+    transition: all 0.5s;
+  }
+
+  //.skill-item__title--aクラスが付与されるとafter要素の三角形を回転させる
+  &--a {
+    &::after {
+      transform: translateY(-50%) rotate(180deg);
+    }
+  }
+}
+
+//初期状態ではcontent内の中身は開かない
+.skill-item__content {
+  display: none;
+  border: 12px inset global.$color-accent2;
+  padding:2px;
+  background-color: #acefdc;
+  border-radius:4px;
+  margin-top:30px;
+}
+
+.skill-level {
+  margin-top: 10px;
+  font-size: 24px;
+  text-align: center;
+  font-weight: 700;
+
+  @include mixin.mq('sp') {
+    margin-top: 5px;
+    font-size: 18px;
+  }
+}
+
+.skill-level__img {
+  margin-top: 10px;
+  text-align: center;
+
+  @include mixin.mq('sp') {
+    margin-top: 0px;
+  }
+
+  img {
+    width: 30px;
+
+    @include mixin.mq('sp') {
+      width: 20px;
+    }
+  }
+
+  //--backがついたもの（黒の星）
+  &--black {
+    &+& {
+      margin-left: 10px;
+    }
+  }
+
+  //-whiteがついたもの(白の星)
+  &--white {
+    margin-left: 10px;
+  }
+}
+
+.skill-text {
+  margin-top: 10px;
+  font-size: 18px;
+  word-break: break-all;
+  text-align: left;
+  font-weight: 500;
+  padding:10px;
+
+  @include mixin.mq('sp') {
+    margin-top: 5px;
+    font-size: 16px;
+  }
+
+  //さらに--gulpというクラスがついてるもの
+  &.--git {
+    margin-top:0px;
+
+    @include mixin.mq('sp') {
+      margin-top: 0px;
+    }
+  }
+}

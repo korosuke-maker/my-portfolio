@@ -1,0 +1,21 @@
+@use "../setting" as global;
+
+//デスクトップなどでマウス使う場合(hover)とスマートフォンなどのタッチスクリーンの場合(hover:noneホバーできない)を見分ける
+//hoverできる時→:hover できない時→:active
+
+@mixin media-hover($hover: 'hover') {
+  @if $hover == 'hover'{
+    @media #{map-get(global.$hovers,$hover)} {
+      &:hover{
+        @content;
+      }
+    }
+  }@else if $hover == 'none' {
+    @media #{map-get(global.$hovers,$hover)} {
+      &:active{
+        @content;
+      }
+    }
+  }
+}
+

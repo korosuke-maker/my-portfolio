@@ -1,0 +1,8 @@
+@use "../setting" as global;
+
+// ウィンドウ幅によってスタイル分け(ブイレイクポイントによって分ける)
+@mixin mq($breakpoint:sp) {
+  @media #{map-get(global.$breakpoints, $breakpoint)} {
+  @content;
+  }
+}

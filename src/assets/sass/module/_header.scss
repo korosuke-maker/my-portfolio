@@ -1,0 +1,150 @@
+@use "../setting" as global;
+@use "../mixin" as mixin;
+
+/* ===================================================
+  #header
+=================================================== */
+
+.header {
+  height: 100px;
+  width: 100%;
+  max-width: 100%;
+  background: linear-gradient(to bottom, rgba(69,148,173,0.7) 0%, rgba(30,227,207,0.7) 100%);
+  position: fixed;
+  box-shadow: 0 5px 3px rgba(rgb(0, 0, 0), 0.16);
+  z-index: map-get(global.$layer,header);
+  top: 0;
+  left: 0;
+  font-style: italic;
+  font-family: global.$font-jp;
+  transition: background 0.4s ease , transform 0.4s ease;
+  @include mixin.media-hover('hover'){
+    background: linear-gradient(to bottom, rgb(69, 149, 173) 0%, rgb(30, 227, 207) 100%);
+  }
+  @include mixin.media-hover('none'){
+    background: linear-gradient(to bottom, rgb(69, 149, 173) 0%, rgb(30, 227, 207) 100%);
+  }
+
+  @include mixin.mq('tab') {
+    height: 90px;
+  }
+
+  @include mixin.mq('sp') {
+    height: 70px;
+  }
+
+  &.hide {
+    transform: translateY(-100px);
+
+    @include mixin.mq('tab') {
+      transform: translateY(-90px);
+    }
+
+    @include mixin.mq('sp') {
+      transform: translateY(-70px);
+    }
+  }
+}
+
+.header__inner {
+  display: flex;
+  align-items: center;
+  height: inherit;
+}
+
+.header-logo {
+  &__link {
+    display: inline-block;
+
+    img {
+      max-width: 100%;
+      width: 130px;
+      height: 100px;
+      vertical-align: middle;
+
+      @include mixin.mq('tab') {
+        width: 80px;
+      }
+
+      @include mixin.mq('sp') {
+        width: 60px;
+      }
+    }
+  }
+}
+
+.header-nav {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  @include mixin.mq('sp') {
+    display: none;
+  }
+}
+
+.header-nav__list {
+  &:not(:first-child) {
+    margin-left: 30px;
+    @include mixin.mq('tab') {
+      margin-left: 20px;
+    }
+  }
+}
+
+.header-nav__link {
+  display: inline-block;
+  text-decoration: none;
+  color: global.$color-text;
+  padding:0 5px;
+  position: relative;
+  text-align: center;
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 100%;
+    border-radius: 4px;
+    height: 2px;
+    background: linear-gradient(135deg, global.$color-accent3 10%, global.$color-accent2);
+    transform: scale(0, 1);
+    transform-origin: center top;
+    transition: all 0.3s ease 0s;
+  }
+  &.github{
+    &::after{
+      display: none;
+    }
+  }
+  @include mixin.media-hover('hover'){
+    &::after{
+      transform: scale(1, 1);
+    }
+  }
+  @include mixin.media-hover('none'){
+    &::after{
+      transform: scale(1, 1);
+    }
+  }
+}
+
+.header-nav__title {
+  display: inline-block;
+  font-family: global.$font-jp;
+  font-size: 18px;
+
+  @include mixin.mq('tab') {
+    font-size: 14px;
+  }
+}
+
+.header-nav__subtitle {
+  display: block;
+  font-size: 10px;
+  text-align: center;
+
+  @include mixin.mq('tab') {
+    font-size: 8px;
+  }
+}
+

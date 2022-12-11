@@ -1,0 +1,337 @@
+@use "../../setting" as global;
+@use "../../mixin" as mixin;
+
+/* ===================================================
+  #contact
+=================================================== */
+
+.contact__inner {
+  @include mixin.inner-back(left, 0deg, url(../img/green6.png)){};
+}
+
+.contact__head-text{
+  margin-top: 160px;
+  text-align: center;
+  font-size: 26px;
+  line-height:2;
+  letter-spacing: 0.04em;
+  span{
+    text-decoration:global.$color-accent3 double underline;
+  }
+  @include mixin.mq('tab') {
+    text-align: left;
+    font-size: 20px;
+    br{
+      display: none;
+    }
+  }
+  @include mixin.mq('sp') {
+    text-align: left;
+    font-size: 16px;
+    margin-top: 70px;
+    line-height: 1.7;
+  }
+}
+
+.contact__form {
+  margin-top: 70px;
+  padding: 50px;
+  background: global.$color-accent1;
+  box-shadow: 0px 25px 10px -15px rgb(0 0 0 / 40%);
+  border: 5px outset global.$color-accent2;
+  border-radius: 10px;
+  @include mixin.mq('tab') {
+    margin-top: 60px;
+    padding: 40px;
+  }
+  @include mixin.mq('sp') {
+    margin-top: 30px;
+    padding: 25px 10px;
+  }
+}
+
+.contact-form__row {
+  display: flex;
+
+  &:not(:first-child) {
+    margin-top: 60px;
+
+    @include mixin.mq('sp') {
+      margin-top: 30px;
+    }
+  }
+
+  //sp時は横並びflex解除
+  @include mixin.mq('sp') {
+    display: block;
+  }
+}
+
+//項目名ラベル
+.contact-form__label {
+  width: 200px;
+  padding: 5px 0 0;
+  margin: 0;
+
+  @include mixin.mq('sp') {
+    width: 100%;
+  }
+
+  label {
+    font-weight: 700;
+    cursor: pointer;
+    user-select: none;
+
+    //if-requiredというクラス名がついたものは必須という文字を擬似要素でつける
+    &.is-required {
+      display: inline-block;
+      position: relative;
+
+      // 必須after要素はpc時縦並び、sp時横並び
+      &::after {
+        content: "必須";
+        position: absolute;
+        top: calc(100% + 2px);
+        left: 0;
+        font-size: 14px;
+        font-weight: 700;
+        color: #fff;
+        background: global.$color-accent2;
+        text-align: center;
+        border-radius: 4px;
+        padding: 3px 8px;
+        line-height: 1;
+
+        @include mixin.mq('sp') {
+          top: 50%;
+          transform: translateY(-50%);
+          left: calc(100% + 6px);
+          width: 44px;
+        }
+      }
+    }
+  }
+}
+
+//フォームのinput要素
+.contact-form__input {
+  //widthラベル名文だけ引いて100%
+  width: calc(100% - 200px);
+  margin: 0;
+  padding: 0;
+  transition: all 0.2s;
+
+  @include mixin.mq('sp') {
+    width: 100%;
+    margin-top: 5px;
+  }
+
+  //labelの中でinput type="text"の要素をリセットしてスタイル当て
+  [type="text"] {
+    box-shadow: 2px 5px 7px -3px rgba(0, 0, 0, 0.7);
+    border: 1px solid #707070;
+    background: #fff;
+    padding: 10px 16px;
+    appearance: none;
+    border-radius: 0;
+    color: inherit;
+    font-family: inherit;
+    font-size: 14px;
+    width: 100%;
+    cursor: pointer;
+    transition: all 0.2s;
+    &:focus{
+      box-shadow: 10px 10px 15px -10px rgba(0, 0, 0, 0.7);
+    }
+    @include mixin.media-hover('hover'){
+      box-shadow: 10px 10px 15px -10px rgba(0, 0, 0, 0.7);
+    }
+    @include mixin.media-hover('none'){
+      box-shadow: 10px 10px 15px -10px rgba(0, 0, 0, 0.7);
+    }
+  }
+
+  //labelの中でinput type="email"の要素をリセットしてスタイル当て
+  [type="email"] {
+    box-shadow: 2px 5px 7px -3px rgba(0, 0, 0, 0.7);
+    border: 1px solid #707070;
+    background: #fff;
+    padding: 10px 16px;
+    appearance: none;
+    border-radius: 0;
+    color: inherit;
+    font-family: inherit;
+    font-size: 14px;
+    width: 100%;
+    cursor: pointer;
+    transition: all 0.2s;
+
+    &:focus {
+      box-shadow: 10px 10px 15px -10px rgba(0, 0, 0, 0.7);
+    }
+    @include mixin.media-hover('hover'){
+      box-shadow: 10px 10px 15px -10px rgba(0, 0, 0, 0.7);
+    }
+    @include mixin.media-hover('none'){
+      box-shadow: 10px 10px 15px -10px rgba(0, 0, 0, 0.7);
+    }
+  }
+
+  // labelの中でtextareaの要素をリセットしてスタイル当て
+  textarea {
+    min-height: 240px;
+    box-shadow: 2px 5px 7px -3px rgba(0, 0, 0, 0.7);
+    border: 1px solid #707070;
+    background: #fff;
+    padding: 10px 16px;
+    appearance: none;
+    border-radius: 0;
+    color: inherit;
+    font-family: inherit;
+    font-size: 14px;
+    width: 100%;
+    resize: vertical;
+    cursor: pointer;
+    transition: all 0.2s;
+    &:focus {
+      box-shadow: 10px 10px 15px -10px rgba(0, 0, 0, 0.7);
+    }
+    @include mixin.media-hover('hover'){
+      box-shadow: 10px 10px 15px -10px rgba(0, 0, 0, 0.7);
+    }
+    @include mixin.media-hover('none'){
+      box-shadow: 10px 10px 15px -10px rgba(0, 0, 0, 0.7);
+    }
+  }
+}
+
+// チェックボックス
+.contact-form__check {
+  display: block;
+  margin: 63px auto;
+  text-align: center;
+
+  @include mixin.mq('sp') {
+    margin: 30px auto 20px;
+  }
+
+  // input type="checkbox"はキーボード選択のためinput要素は残す　代わりにspan擬似要素before,afterでデザイン作成
+  [type="checkbox"] {
+    display: inline-block;
+    opacity: 0;
+    position: absolute;
+  }
+
+  span {
+    display: inline-block;
+    padding-left: 49px;
+    position: relative;
+    cursor: pointer;
+    user-select: none;
+    backface-visibility: hidden;
+
+    @include mixin.mq('sp') {
+      padding-left: 32px;
+      font-size: 14px;
+    }
+
+    //チェックボックス外側四角のデザイン
+    &::before {
+      content: "";
+      width: 25px;
+      height: 25px;
+      background: #fff;
+      border: 1px solid #a69c9c;
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    //チェックボックス内側のチェックのデザイン 初期状態はnone 元のinput要素がcheckedの時にdisplayblockまたはopacity1
+    &::after {
+      content: "";
+      width: 25px;
+      height: 25px;
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      background: transparent url(../img/contact-check.png) no-repeat center center / contain;
+      image-rendering: -webkit-optimize-contrast;
+      transition: all 0.4s;
+      opacity: 0;
+    }
+  }
+
+  // 元のチェックボックスのinput要素がcheckedの時にspan::afterをblock状態
+  [type="checkbox"]:checked+span {
+    &::after {
+      opacity: 1;
+    }
+  }
+
+  //focus時before要素にoutlineつける
+  [type="checkbox"]:focus-visible+span {
+    &::before {
+      outline: -webkit-focus-ring-color auto 1px;
+    }
+  }
+
+  a {
+    font-weight: 700;
+    text-decoration: underline;
+    transition: all 0.3s;
+    @include mixin.media-hover('hover'){
+      opacity:0.6;
+    }
+    @include mixin.media-hover('none'){
+      opacity:0.6;
+    }
+  }
+}
+
+.contact-form__button {
+  margin-top: 10px;
+  text-align: center;
+  //submitボタンのスタイル
+  [type="submit"] {
+    box-shadow: 0 3px 6px rgba(#000, 0.16);
+    appearance: none;
+    border: none;
+    background: global.$color-accent2 url(../img/arrow-submit.png) no-repeat center right 12px / 16px 16px;
+    width: 304px;
+    max-width: 100%;
+    display: inline-block;
+    font-weight: 700;
+    color: #fff;
+    padding: 14px 20px;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+    opacity: 0.6;
+    box-shadow: 5px 15px 10px -10px rgba(0, 0, 0, 0.7);
+
+    &:focus{
+      box-shadow: 5px 10px 10px -10px rgba(0, 0, 0, 0.7);
+    }
+    //入力項目が全て入ればis-activeクラスを与えてopacity1に
+    &.is-active {
+      box-shadow: 5px 10px 10px -10px rgba(0, 0, 0, 0.7);
+      opacity:1;
+      color:yellow;
+    }
+  }
+}
+
+.contact-message{
+  text-align: center;
+    font-weight: 600;
+    display: none;
+    &.-error{
+        color: rgb(168, 0, 0);
+    }
+}
+

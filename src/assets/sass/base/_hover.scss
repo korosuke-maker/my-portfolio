@@ -1,0 +1,18 @@
+@use '../setting' as global;
+@use '../mixin' as mixin;
+
+//hoverするリンク要素につける共通パーツ（mixinのhoverできるできないと絡めてあるのでhtmlクラス名に当てるだけ）
+.hover{
+  transition:color 0.4s, transform 0.4s;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  @include mixin.media-hover('hover'){
+    color: #fff;
+    transform: translateY(-2px);
+  }
+  @include mixin.media-hover('none'){
+    color:#fff;
+    transform: translateY(-2px);
+  }
+}
+

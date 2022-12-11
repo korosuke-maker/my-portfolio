@@ -1,0 +1,69 @@
+@use "./media-breakpoint" as mixin;
+
+//section-title左右横についてる画像のスタイルをパターン化(各セクションの〇〇__innerクラスで使う)
+//inner-backで呼び出し、変数を付与し左右や角度やurlを適宜調整
+@mixin inner-back($p-side: right, $t-rotate: 0deg, $b-url: url(../img/green1.png)) {
+	position: relative;
+	@if $p-side ==right {
+		&::after {
+			position: absolute;
+			content: "";
+			width: 280px;
+			height: 250px;
+			max-width: 100%;
+			transform: rotate($t-rotate);
+			top: 30px;
+			right: 10%;
+			z-index: 40;
+			user-select: none;
+			background: $b-url no-repeat center center / contain;
+			@content;
+
+			@include mixin.mq('tab') {
+				width: 250px;
+				height: 200px;
+				right: 10%;
+				@content;
+			}
+
+			@include mixin.mq('sp') {
+				width: 100px;
+				height: 100px;
+				top: 10px;
+				right: 0%;
+				@content;
+			}
+		}
+	}
+
+	@else if $p-side ==left {
+		&::after {
+			position: absolute;
+			content: "";
+			width: 280px;
+			height: 250px;
+			max-width: 100%;
+			transform: rotate($t-rotate);
+			top: 30px;
+			left: 10%;
+			user-select: none;
+			background: $b-url no-repeat center center / contain;
+			@content;
+
+			@include mixin.mq('tab') {
+				width: 250px;
+				height: 200px;
+				left: 10%;
+				@content;
+			}
+
+			@include mixin.mq('sp') {
+				width: 100px;
+				height: 100px;
+				top: 10px;
+				left: 0%;
+				@content;
+			}
+		}
+	}
+}

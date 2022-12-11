@@ -1,0 +1,264 @@
+@use "../setting" as global;
+@use "../mixin" as mixin;
+
+/* ===================================================
+  #共通クラス（使い回しするクラス）
+=================================================== */
+
+.section {
+	padding: 80px 0 60px 0;
+	background: rgb(193, 231, 197);
+	//sectionの高さはパララックス部分があるので少し上げる
+	position: relative;
+	z-index: map-get(global.$layer, section);
+	&:nth-of-type(2n) {
+		background: global.$color-main;
+	}
+//section-aboutはパララックス部分本体で他セクションよりさげる
+	&.about{
+		background: rgba(45, 161, 99, 0.286);
+		position: relative;
+		z-index: map-get(global.$layer,section-about);
+	}
+
+	@include mixin.mq('sp') {
+		padding-top: 42px;
+		padding-bottom: 15px;
+	}
+}
+
+.section-title {
+	font-size: 48px;
+	font-weight: 700;
+	text-align: center;
+	padding-bottom: 12px;
+	font-family: global.$font-en;
+	font-style: oblique;
+
+	@include mixin.mq('sp') {
+		font-size: 28px;
+	}
+}
+
+
+.section-inline {
+	padding: 50px;
+	position: relative;
+	z-index: map-get(global.$layer, section-title-inline);
+	@include mixin.mq('sp') {
+		padding: 38px;
+	}
+
+	&::before {
+		display: block;
+		content: "";
+		max-width:160%;
+		width: clamp(280px,120%,400px);
+		position: absolute;
+		left: 50%;
+		transform: translateX(-50%);
+		top: 68%;
+		font-family: global.$font-section-title;
+		font-size: 100px;
+		color: rgba(255, 255, 255, 0.373);
+		animation:changeColor 7s infinite alternate;
+		z-index: map-get(global.$layer, section-title-inline-before);
+		@include mixin.mq('tab') {
+			font-size: 80px;
+		}
+
+		@include mixin.mq('sp') {
+			top: 75%;
+			font-size: 44px;
+		}
+	}
+
+	&::after {
+		content: "";
+		position: absolute;
+		left: 50%;
+		transform: translateX(-50%) scale(1,1);
+		transform-origin: left center;
+		bottom: 35px;
+		width: 60%;
+		height: 5px;
+		border-radius:10px;
+		background:linear-gradient(to right, global.$color-accent3 5% , global.$color-accent2 50%,global.$color-accent1 80%, transparent );
+		z-index: map-get(global.$layer, section-title-inline-after);
+
+		@include mixin.mq('sp') {
+			height: 5px;
+			width: 60%;
+			bottom: 27px;
+		}
+	}
+
+	//before擬似要素の各セクションにおける値
+	&.section-title-inline {
+		&-concept {
+			&::before {
+				content: "Concept";
+			}
+		}
+
+		&-skill {
+			&::before {
+				content: "Skill";
+			}
+		}
+
+		&-production {
+			&::before {
+				content: "Production";
+			}
+		}
+
+		&-about {
+			&::before {
+				content: "About";
+			}
+		}
+
+		&-contact {
+			&::before {
+				content: "Contact";
+			}
+		}
+	}
+}
+
+//セクション背景色アニメーションの基準となる要素
+.section-bgextend{
+	animation: bgextendBase 0.7s forwards ;
+	position: relative;
+	overflow: hidden;
+}
+
+// 検知して付与されるセクションテキストクラス（.bgappearTrigger要素に付与される）
+.section-bgappear{
+	animation: bgextendSecond 0.8s 0.6s forwards;
+}
+
+// 検知して付与される色付き長方形のクラス（.bgextendTrigger要素に付与される）
+.bgLRextend{
+	&::before{
+		animation: bgLR 0.7s forwards ;
+		content: "";
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		background: global.$color-accent1;
+	}
+}
+
+//スクロール検知してアニメーションするためのクラス（アニメーショントリガー 初期状態はopacity0）
+.bgextendTrigger,
+.bgappearTrigger{
+	opacity:0;
+}
+
+//sectionのcontent周りの余白
+.content-space {
+	margin: 150px auto 40px;
+
+	@include mixin.mq('tab') {
+		margin: 150px auto 30px;
+	}
+
+	@include mixin.mq('sp') {
+		margin: 60px auto 30px;
+	}
+}
+
+//modalの共通パーツ(modal-body,close-button,modal-back,)
+
+// モーダル中身
+.modal-body {
+	position: fixed;
+	z-index: map-get(global.$layer, modal-body);
+	background: #fff;
+	box-shadow: 0 0 3px rgba(#000, 0.16);
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	transition: all 0.4s;
+	display: none;
+
+	@include mixin.mq('sp') {
+		padding: 30px 20px;
+		font-size: 12px;
+	}
+}
+
+//モーダルcloseボタン
+.close-button {
+	margin-top: 20px;
+	text-align: center;
+
+	a {
+		display: inline-block;
+		width: 176px;
+		max-width: 100%;
+		padding: 14px;
+		color: #fff;
+		background: global.$color-accent2;
+		font-weight: 700;
+		font-size: 18px;
+		border-radius: 10px;
+		box-shadow: 0 5px 6px rgba(#000, 0.16);
+		text-decoration: none;
+		transition: all 0.3s;
+
+		&:hover {
+			background: global.$color-accent1;
+		}
+
+		@include mixin.mq('tab') {
+			padding: 10px;
+			font-size: 16px;
+		}
+
+		@include mixin.mq('sp') {
+			padding: 8px;
+			font-size: 14px;
+		}
+	}
+}
+
+//閉じるバツ（×）印
+.close-icon {
+	position: absolute;
+	height: 60px;
+	width: 60px;
+	top: 0;
+	right: 0;
+	transform: translate(50%, -50%);
+	background: global.$color-accent2 url(../img/batsu-modal.png) no-repeat center center / 30px 30px;
+	border-radius: 50%;
+	cursor: pointer;
+	transition: transform 0.3s;
+
+	&:hover {
+		transform: translate(50%, -50%) scale(1.05);
+	}
+
+	@include mixin.mq('sp') {
+		height: 40px;
+		width: 40px;
+		background: global.$color-accent2 url(../img/batsu-modal.png) no-repeat center center / 20px 20px;
+	}
+}
+
+// モーダルの黒い背景
+.modal-back {
+	position: fixed;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	width: 100vw;
+	height: 100vh;
+	background: rgba(0, 0, 0, 0.8);
+	z-index: map-get(global.$layer, modal-back);
+	display: none;
+}

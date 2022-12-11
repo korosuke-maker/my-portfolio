@@ -1,0 +1,86 @@
+@use "../../setting/" as global;
+@use "../../mixin/" as mixin;
+
+/* ===================================================
+  #modal-twitter ツイッターのモーダルスタイル
+=================================================== */
+
+.modal-twitter{
+  border:5px solid gray;
+  width: 60%;
+  height: 70%;
+  padding:40px;
+  max-height:calc(100% - 40px * 2);
+  max-width:calc(100% - 40px * 2);
+  display: none;
+  @include mixin.mq('tab') {
+    width:60%;
+    height: 70%;
+  }
+  @include mixin.mq('sp') {
+    width:100%;
+    height:80%;
+    padding:25px 10px;
+  }
+}
+
+.modal-twitter__head{
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 1;
+  text-align: center;
+  @include mixin.mq('tab') {
+    text-align: left;
+    font-size:16px;
+  }
+  @include mixin.mq('sp') {
+    text-align: left;
+    font-size:12px;
+  }
+}
+
+.modal-twitter__head-inline{
+  color:skyblue;
+  a{
+    display:inline-block;
+    padding:5px;
+    text-decoration:skyblue solid underline;
+  }
+}
+
+.modal-twitter__content{
+  margin-top: 20px;
+  border:10px solid skyblue;
+  border-radius:15px;
+  width:100%;
+  height:calc(100% - 150px);
+  overflow-y: auto;
+  overscroll-behavior-y: none;
+  @include mixin.mq('tab') {
+    height: calc(100% - 130px);
+  }
+  @include mixin.mq('sp') {
+    margin-top: 10px;
+    height: calc(100% - 130px);
+  }
+}
+
+.twitter-timeline.twitter-timeline-rendered{
+  position: relative;
+  >iframe{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+}
+
+.modal-twitter-background{
+
+}
+
+
+
+

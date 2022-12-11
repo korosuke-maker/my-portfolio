@@ -1,0 +1,221 @@
+@use "../../setting" as global;
+@use "../../mixin" as mixin;
+
+/* ===================================================
+  #production
+=================================================== */
+
+.production__inner {
+  @include mixin.inner-back(left, 0deg, url(../img/green7.png)){
+    @include mixin.mq('sp') {
+      width: 90px;
+      height: 90px;
+    }
+  };
+}
+
+.production__head-text {
+  margin-top: 140px;
+  text-align: center;
+  font-size: 26px;
+  line-height:2;
+  letter-spacing: 0.04em;
+
+  @include mixin.mq('tab') {
+    text-align: left;
+    font-size: 20px;
+    br{
+      display: none;
+    }
+  }
+
+  @include mixin.mq('sp') {
+    margin-top: 70px;
+    font-size: 16px;
+    text-align: left;
+    line-height: 1.7;
+  }
+  &-inline{
+    text-decoration: global.$color-accent3 dotted underline;
+  }
+}
+
+
+
+
+//スクロール部分
+.production__items-wrap {
+  overflow-x: scroll;
+  overflow-y: hidden;
+
+  //スクロールバーのリセット
+  /* IE, Edge 対応 */
+  -ms-overflow-style: none;
+  /* Firefox 対応 */
+  scrollbar-width: none;
+}
+
+.production__items-wrap::-webkit-scrollbar {
+  //スクロールバーのリセットCSS
+  /* Chrome, Safari 対応 */
+  display: none;
+}
+
+.production__items {
+  display: flex;
+  margin-top:100px;
+  @include mixin.mq('tab') {
+    margin-top:80px;
+  }
+  @include mixin.mq('sp') {
+    margin-bottom:50px;
+  }
+}
+
+/* #simplebarのデザイン当て　ここから
+------------------------------------------------------ */
+.simplebar-scrollbar::before {
+  /*-- スクロールバー自体の色を変更 --*/
+  background: global.$color-accent2;
+  box-shadow: inset 0px 3px 3px rgba(0, 0, 0, 0.7);
+  border-radius: 10px;
+}
+
+.simplebar-track.simplebar-horizontal .simplebar-scrollbar:before {
+  height: 15px;
+
+  @include mixin.mq('sp') {
+    height: 12px;
+  }
+}
+
+.simplebar-scrollbar.simplebar-visible:before {
+  opacity: 1;
+}
+
+.simplebar-track {
+  background: global.$color-accent1;
+}
+
+.simplebar-track.simplebar-horizontal {
+  height: 20px;
+  border-radius: 20px;
+
+  @include mixin.mq('sp') {
+    height: 16px;
+  }
+}
+
+/* #simplebarのデザイン当て　ここまで
+------------------------------------------------------ */
+
+
+.production-item {
+  background: global.$color-accent1;
+  border-radius: 40px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 10px 10px 15px 4px rgb(0 0 0 / 25%);
+  border: 5px outset global.$color-accent2;
+  @include mixin.mq('sp') {
+    padding: 20px;
+  }
+
+  &:not(:first-child) {
+    margin-left: 20px;
+  }
+}
+
+.production-item__content{
+  
+}
+
+.production-item__link {
+  display: inline-block;
+  transition: all 0.3s ease 0s;
+  border-radius: 40px;
+  position: relative;
+  overflow: hidden;
+  z-index:1;
+
+  //before擬似要素で黒いmaskを作成　初期状態はopacity0
+  &::before {
+    content: "Click to view site";
+    font-size: 20px;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    user-select: none;
+    opacity: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: map-get(global.$layer,production-item__link-before);
+    transition: all 0.4s;
+  }
+
+  img {
+    text-align: center;
+    border-radius: 40px;
+    margin: 0 auto;
+    height: auto;
+    user-select: none;
+    transition: transform 0.4s ease 0s;
+    @include mixin.mq('pc') {
+      min-width:590px;
+    }
+    @include mixin.mq('tab') {
+      min-width: 450px;
+    }
+
+    @include mixin.mq('sp') {
+      min-width: 350px;
+    }
+  }
+
+  &:hover {
+    @include mixin.media-hover('hover'){
+      &::before{
+        opacity:1;
+        font-size: 36px;
+        @include mixin.mq('sp') {
+          font-size:28px;
+        }
+      }
+      > img{
+        transform: scale(1.05,1.05);
+      }
+    }
+    @include mixin.media-hover('none'){
+      &::before{
+        opacity:1;
+        font-size: 36px;
+        @include mixin.mq('sp') {
+          font-size:28px;
+        }
+      }
+      > img{
+        transform: scale(1.05,1.05);
+      }
+    }
+  }
+}
+
+.production-item__title {
+  font-size: 26px;
+  font-weight: 500;
+  padding: 10px 0;
+
+  @include mixin.mq('sp') {
+    font-size: 16px;
+    padding: 0;
+  }
+}
+
+

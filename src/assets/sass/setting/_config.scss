@@ -1,0 +1,80 @@
+/* ===================================================
+    #config
+=================================================== */
+@font-face {
+  font-family: "Antro Vectra";
+  src: url(../fonts/Antro_Vectra_Bolder.otf) format("opentype");
+}
+
+$color-text: #333333;
+$color-main: #bee0ce;
+$color-accent1: rgba(30, 227, 207, 0.9);
+$color-accent2: #4594ad;
+$color-accent3: #1B2E5D;
+
+$font-en:'Poppins','Oswald',sans-serif;
+$font-jp: 'ヒラギノ角ゴシック', 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'ヒラギノ角ゴ ProN W3', sans-serif;
+$font-section-title: "Antro Vectra",'Dancing Script', 'Allura', cursive;
+
+$layout-width-inner: 1200px;
+
+$breakpoints: (
+  'sp': 'screen and (max-width: 767px)',
+  'tab': 'screen and (min-width:768px) and (max-width:#{$layout-width-inner - 1})',
+  'pc': 'screen and (min-width:#{$layout-width-inner})'
+)!default;
+
+$hovers:(
+  'hover':'(hover: hover)',
+  'none':'(hover: none)'
+)!default;
+
+
+//レイヤーの定義 取り出し方の例 → map-get(global.$layer,service__menus)
+
+$layer : (
+  //ローディングsplash
+  loading: 999,
+
+  // モーダル
+  modal-body:301,
+  modal-back:300,
+
+  // ドロワー
+  drawer-icon: 200,
+  drawer-content:199,
+  drawer-background:198,
+
+  // totop
+  totop:150,
+
+  // ヘッダー
+  header: 100,
+
+  // section-title
+  section-title-inline:50,
+  section-title-inline-after:40,
+  section-title-inline-before:30,
+
+  // mainvisual
+  home__content:10,
+  home__content-after:-10,
+
+  // skillセクション
+  skill-item-before:10,
+
+  // productionセクション
+  production-item__link-before:10,
+
+  // section共通
+  section:3,
+  mainvisual:3,
+  footer:3,
+  section-about:2, //aboutは、パララックスのため1だけ他セクションより下げる
+
+  default: 1,
+
+  //パララックス
+  parallarx:-1,
+
+);

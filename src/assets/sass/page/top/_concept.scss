@@ -1,0 +1,72 @@
+@use "../../setting" as global;
+@use "../../mixin" as mixin;
+
+/* ===================================================
+  #concept
+=================================================== */
+
+.concept__inner {
+  @include mixin.inner-back(left, -22deg, url(../img/green10.png)){};
+}
+
+.concept__content {
+  padding: 80px;
+  background: global.$color-accent1;
+  border: 5px outset global.$color-accent2;
+  box-shadow: 0px 25px 10px -15px rgb(0 0 0 / 40%);
+  border-radius: 60px;
+  text-align: left;
+  @include mixin.mq('sp') {
+    padding: 50px 20px;
+  }
+}
+
+.concept-content__head {
+  font-size: 40px;
+  text-align: center;
+  font-weight: 600;
+
+  @include mixin.mq('tab') {
+    text-align: left;
+  }
+
+  @include mixin.mq('sp') {
+    text-align: center;
+    font-size: 20px;
+  }
+}
+
+.concept-content__head-inline {
+  padding: 5px 0;
+  background: linear-gradient(transparent 70%, global.$color-accent2 70%);
+
+  @include mixin.mq('sp') {
+    padding: 2px 0;
+  }
+}
+
+.concept-content__text {
+  margin-top: 90px;
+  text-align: left;
+  letter-spacing:0.06em;
+  font-weight: 500;
+
+  @include mixin.mq('pc') {
+    padding: 0px 100px;
+    font-size: 24px;
+    line-height: 2;
+  }
+
+  @include mixin.mq('tab') {
+    padding: 0px 30px;
+    font-size: 24px;
+    line-height: 2;
+  }
+
+  @include mixin.mq('sp') {
+    margin-top: 30px;
+    padding: 0;
+    line-height: 3;
+    font-size: 14px;
+  }
+}

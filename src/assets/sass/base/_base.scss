@@ -1,0 +1,41 @@
+@use "../setting" as global;
+@use "../mixin" as mixin;
+
+
+html,
+body {
+    color: global.$color-text;
+    &.is-fixed {
+        overflow: hidden;
+    }
+}
+
+body {
+    font-family: global.$font-jp;
+    font-size: 16px;
+    line-height: 1.6;
+    background: #fff;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+//aタグの文字の色は親要素を継承する（もともと青色になるように設定されている）
+a {
+    color: inherit;
+}
+
+// PC時、SP時表示非表示
+@include mixin.mq('pc') {
+    .is-sp {
+        display: none;
+    }
+}
+
+@include mixin.mq('sp') {
+    .is-pc {
+        display: none;
+    }
+}

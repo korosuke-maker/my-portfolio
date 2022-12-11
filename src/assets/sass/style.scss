@@ -1,0 +1,10 @@
+@charset "UTF-8";
+
+//すべての統括scssファイル
+@use "./setting";
+@use "./mixin";
+@use "./plugins";
+@use "./base";
+@use "./module";
+@use "./page";
+

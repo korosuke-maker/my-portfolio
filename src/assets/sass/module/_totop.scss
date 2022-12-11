@@ -1,0 +1,74 @@
+@use "../setting" as global;
+@use "../mixin" as mixin;
+
+/* ===================================================
+  #totop
+=================================================== */
+
+
+.totop {
+  position: fixed;
+  right: 40px;
+  bottom: 40px;
+  z-index: map-get(global.$layer,totop);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.5s;
+  user-select: none;
+  @include mixin.mq('tab') {
+    right: 24px;
+  }
+  @include mixin.mq('sp') {
+    right: 16px;
+    bottom:20px;
+  }
+
+  //初期状態totopの姿消して、is-showが付与されたら出現
+  &.is-show {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+.totop__link {
+  text-decoration: none;
+  display: inline-block;
+  transition: all 0.3s ease 0s;
+  padding-bottom: 20px;
+  position: relative;
+  cursor: pointer;
+  &::after {
+    display: inline-block;
+    position: absolute;
+    content: "TOP";
+    font-family: global.$font-en;
+    font-weight: 700;
+    font-size:12px;
+    opacity: 0;
+    bottom: 0;
+    right: 50%;
+    transform: translateX(50%);
+  }
+  @include mixin.media-hover('hover'){
+    transform: translateY(-15px);
+    &::after{
+      opacity:1;
+    }
+  }
+  @include mixin.media-hover('none'){
+    transform: translateY(-15px);
+    &::after{
+      opacity:1;
+    }
+  }
+  img {
+    user-select: none;
+    width: 50px;
+    @include mixin.mq('tab') {
+      width: 40px;
+    }
+    @include mixin.mq('sp') {
+        width: 35px;
+    }
+  }
+}

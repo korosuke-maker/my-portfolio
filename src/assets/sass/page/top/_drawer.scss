@@ -1,0 +1,216 @@
+@use "../../setting" as global;
+@use "../../mixin" as mixin;
+
+/* ===================================================
+  #drawer
+=================================================== */
+.drawer-icon {
+  position: fixed;
+  z-index: map-get(global.$layer,drawer-icon);
+  display: none;
+  cursor: pointer;
+  transition: transform 0.5s ease 0s;
+  @include mixin.media-hover('hover'){
+    .drawer-icon__bar1,
+    .drawer-icon__bar2,
+    .drawer-icon__bar3{
+      background: global.$color-main;
+    }
+  }
+  @include mixin.media-hover('none'){
+    .drawer-icon__bar1,
+    .drawer-icon__bar2,
+    .drawer-icon__bar3{
+      background: global.$color-main;
+    }
+  }
+
+  @include mixin.mq('tab') {
+    display: none;
+  }
+
+  @include mixin.mq('sp') {
+    display: block;
+    top: 25px;
+    right: 16px;
+  }
+
+  //drawerが開いたときのicon線の状態
+  &.is-active {
+    transform: translateX(calc(-80vw + 50% - 20px));
+
+    .drawer-icon__bar1 {
+      transform: rotate(45deg);
+      top: 8px;
+    }
+
+    .drawer-icon__bar2 {
+      display: none;
+    }
+
+    .drawer-icon__bar3 {
+      transform: rotate(-45deg);
+      top: 8px;
+    }
+  }
+}
+
+//drawer-iconの箱を確保する
+.drawer-icon__bars {
+  width: 35px;
+  height: 20px;
+  display: block;
+  position: relative;
+}
+
+//iconそれぞれの線の初期状態
+.drawer-icon__bar1,
+.drawer-icon__bar2,
+.drawer-icon__bar3 {
+  position: absolute;
+  width: 35px;
+  height: 4px;
+  background: global.$color-accent1;
+  top: 0;
+  left: 0;
+  transition: all 0.4s ease;
+  &.change-color {
+    background: global.$color-accent2;
+  }
+}
+
+.drawer-icon__bar1 {
+  top: 0;
+}
+
+.drawer-icon__bar2 {
+  top: 8px;
+}
+
+.drawer-icon__bar3 {
+  top: 16px;
+}
+
+
+.drawer-content {
+  width: 80%;
+  height: 100vh;
+  position: fixed;
+  right: 0;
+  top: 0;
+  background: global.$color-accent1;
+  box-shadow: 0 0 10px rgba(rgb(0, 0, 0), 0.16);
+  z-index: map-get(global.$layer,drawer-content);
+  transform: translateX(105%);
+  transition: transform 0.5s ease 0s;
+  font-style: italic;
+
+  &.is-active {
+    transform: translateX(0);
+  }
+}
+
+.drawer-content__item {
+  background: global.$color-accent2;
+  border-bottom: 5px double #fff;
+}
+
+.drawer-content-item__link {
+  display: block;
+  color: #fff;
+  text-decoration: none;
+  padding: 18px 20px;
+  font-size: 16px;
+  transition: all 0.3s;
+  position: relative;
+    &::after {
+      display: inline-block;
+      content: "";
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      right: 18px;
+      background: #fff url(../img/arrow.png) no-repeat center center / contain;
+      width: 20px;
+      height: 20px;
+      transition: all 0.3s;
+    }
+  @include mixin.media-hover('hover'){
+    color:global.$color-main;
+    &::after{
+      background: global.$color-main url(../img/arrow.png) no-repeat center center / contain;
+    }
+  }
+  @include mixin.media-hover('none'){
+    color:global.$color-main;
+    &::after{
+      background: global.$color-main url(../img/arrow.png) no-repeat center center / contain;
+    }
+  }
+
+  span {
+    font-size: 10px;
+  }
+}
+
+.drawer-contact__lists {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  flex-wrap: wrap;
+  padding-top: 30px;
+}
+
+.drawer-contact__list {
+  a {
+    color: #fff;
+    display: inline-block;
+    font-size: 45px;
+    text-decoration: none;
+    transition: all 0.2s ease 0s;
+    text-align: center;
+    width: 45px;
+
+    &.email {
+      color: global.$color-accent3;
+    }
+
+    &.instagram {
+      border-radius: 7px;
+      background: linear-gradient(to right, #f39800, #009944, #0068b7, #1d2088, #920783);
+      color: #fff;
+    }
+
+    &.twitter {
+      color: #1D9BF0;
+    }
+
+    @include mixin.media-hover('hover'){
+      transform: scale(1.2,1.2);
+      opacity:0.7;
+    }
+    @include mixin.media-hover('none'){
+      transform: scale(1.2,1.2);
+      opacity:0.7;
+    }
+  }
+}
+
+.drawer-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom:0;
+  right:0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(#000, 0.7);
+  z-index:map-get(global.$layer,drawer-background);
+  overscroll-behavior: none;
+  display: none;
+
+  &.is-active {
+    display: block;
+  }
+}

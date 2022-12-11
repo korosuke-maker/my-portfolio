@@ -1,0 +1,68 @@
+@use "../../setting" as global;
+@use "../../mixin" as mixin;
+
+/* ===================================================
+  #loadingロゴアニメーション
+=================================================== */
+
+/*========= LoadingのためのCSS ===============*/
+
+/* Loading背景画面設定　*/
+#splash {
+  /*fixedで全面に固定*/
+	position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+	width: 100vw;
+	height: 100vh;
+	z-index: map-get(global.$layer,loading);
+	background:rgb(48, 114, 111);
+	text-align:center;
+	overscroll-behavior:none;
+	color:#fff;
+}
+
+/* Loading画像中央配置　*/
+#splash_logo {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+/* Loading アイコンの大きさ設定　*/
+#splash_logo svg{
+    width:1500px;
+}
+
+@media screen and (max-width: 767px){
+	#splash_logo svg{
+    width:370px;
+	}
+}
+
+@media screen and (min-width:768px) and (max-width:1199px){
+	#splash_logo svg{
+    width:900px;
+	}
+}
+
+
+/*=============== SVGアニメーション内の指定 =================*/
+
+/*アニメーション前の指定*/
+#mask path {
+  fill-opacity: 0;/*最初は透過0で見えない状態*/
+  transition: fill-opacity .5s;/*カラーがつく際のアニメーション0.5秒で変化*/
+  fill: none;/*塗りがない状態*/
+  stroke: #fff;/*線の色*/
+	}
+
+/*アニメーション後に.doneというクラス名がで付与された時の指定*/
+#mask.done path{
+  fill: #1ee3cfee;/*塗りの色*/
+  fill-opacity: 1;/*透過1で見える状態*/
+  stroke: none;/*線の色なし*/
+	}

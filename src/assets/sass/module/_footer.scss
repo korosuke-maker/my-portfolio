@@ -1,0 +1,208 @@
+@use "../setting" as global;
+@use "../mixin" as mixin;
+
+/* ===================================================
+  #footer
+=================================================== */
+
+.footer {
+  background: linear-gradient(to bottom, global.$color-accent2 0%, rgba(30, 227, 207, 1) 100%);
+  padding: 40px 0 24px;
+  opacity:1;
+  font-family: global.$font-jp;
+  font-style: italic;
+  position: relative;
+  z-index: map-get(global.$layer, footer);
+
+  @include mixin.mq('tab') {
+    padding-top: 30px;
+    padding-bottom: 14px;
+  }
+}
+
+.footer__content {
+  @include mixin.mq('pc') {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  @include mixin.mq('tab') {
+    display: block;
+    width: 100%;
+  }
+
+  @include mixin.mq('sp') {
+    display: block;
+    width: 100%;
+  }
+}
+
+.footer__left {
+  flex: 0 0 30%;
+  margin: auto;
+  text-align: center;
+
+  @include mixin.mq('tab') {
+    width: 100%;
+  }
+
+  @include mixin.mq('sp') {
+    width: 100%;
+  }
+}
+
+.footer__logo {
+  width: 120px;
+  margin: 0 auto;
+  user-select: none;
+
+  @include mixin.mq('tab') {
+    width: 100px;
+  }
+
+  @include mixin.mq('sp') {
+    width: 90px;
+  }
+
+  img {
+    max-width: 100%;
+    width: 100%;
+    height: auto;
+  }
+}
+
+.footer__email {
+  
+}
+
+.footer__email-menu {
+  dt {
+    display: inline-block;
+    user-select: none;
+    transition: all 0.3s;
+
+    a {
+      font-size: 18px;
+      display: inline-block;
+
+      @include mixin.mq('sp') {
+        font-size: 16px;
+      }
+    }
+  }
+
+  dd {
+    font-size: 18px;
+
+    @include mixin.mq('sp') {
+      font-size: 14px;
+    }
+  }
+}
+
+.footer__center {
+  flex: 0 0 30%;
+  margin: auto;
+  text-align: center;
+
+  @include mixin.mq('tab') {
+    margin-top: 20px;
+  }
+
+  @include mixin.mq('sp') {
+    margin-top: 12px;
+  }
+}
+
+.footer__nav {
+  li {
+    &:not(:first-child) {
+      margin-top: 5px;
+    }
+  }
+}
+
+.footer-nav-link {
+  display: inline-block;
+  font-size: 18px;
+  transition: all 0.3s;
+
+  @include mixin.mq('sp') {
+    font-size: 16px;
+  }
+}
+
+.footer__right {
+  flex: 0 0 30%;
+  margin: auto;
+  text-align: center;
+}
+
+.footer__sns {
+  @include mixin.mq('tab') {
+    margin-top: 25px;
+  }
+
+  @include mixin.mq('sp') {
+    margin-top: 15px;
+  }
+}
+
+.footer__sns-title {
+  font-size: 18px;
+  font-weight: 500;
+  user-select: none;
+
+  @include mixin.mq('sp') {
+    font-size: 16px;
+  }
+}
+
+.footer__sns-menu {
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+
+  @include mixin.mq('sp') {
+    gap: 30px;
+  }
+}
+
+.footer__sns-list {
+  font-size: 40px;
+
+  @include mixin.mq('sp') {
+    font-size: 32px;
+  }
+
+  a {
+    display: inline-block;
+    transition: all 0.3s;
+  }
+}
+
+.footer__privacy {
+  text-align: center;
+  margin-top: 20px;
+
+  @include mixin.mq('sp') {
+    font-size: 14px;
+    margin-top: 10px;
+  }
+
+  a {
+    display: inline-block;
+    transition: all 0.3s;
+  }
+}
+
+.footer__copy {
+  margin-top: 10px;
+  color: #707070;
+  text-align: center;
+
+  @include mixin.mq('sp') {
+    font-size: 10px;
+  }
+}
